@@ -1,5 +1,6 @@
 
 
+from email.policy import default
 from django.utils import timezone
 from django.db import models
 
@@ -24,7 +25,7 @@ class Wallet(models.Model):
     customer=models.ForeignKey('Customer',on_delete=models.CASCADE,related_name='Wallet_customer',null=True)
     balance=models.IntegerField()
     amount=models.IntegerField()
-    dateTime=models.DateTimeField(default=timezone.now)
+    DateTime=models.DateTimeField(default=timezone.now)
     isactive=models.BooleanField()
     currency=models.CharField(max_length=200,null=True)
     pin=models.CharField( max_length=12,null=True)
@@ -32,29 +33,31 @@ class Wallet(models.Model):
    
 
 class Account(models.Model):
-    account_number=models.IntegerField(null=True)
+    account_number=models.IntegerField(default=0, null=True)
     account_name=models.CharField(max_length=15,null=True)
     account_type=models.CharField(max_length=20,null=True)
     balance=models.IntegerField(null=True)
-    wallet=models.ForeignKey('Wallet',on_delete=models.CASCADE,related_name='Account_wallet')
+    wallet=models.ForeignKey('Wallet',on_delete=models.CASCADE,related_name='Account_wallet',null=True)
 
-class Transactions(models.Model):
-    transaction_code=models.CharField(max_length=10,null=True)
-    recipient=models.ForeignKey('Customer',on_delete=models.CASCADE,related_name='Transactions_recipient')
-    origin=models.ForeignKey('Account',on_delete=models.CASCADE,related_name='Transactions_origin')
-    destination_account=models.ForeignKey('Customer',on_delete=models.CASCADE,related_name='Transactions_destination_account')
-    value=models.IntegerField()
-    discription=models.TextField(max_length=100,null=True)
-    transaction_fee=models.IntegerField()
-    transaction_type=models.CharField(max_length=10,null=True)
-    wallet=models.ForeignKey('Wallet',on_delete=models.CASCADE,related_name='Transactions_wallet')
+class Transaction(models.Model):
+    transaction_ref=models.CharField(max_length=150,null=True)
+    wallet=models.ForeignKey('Wallet', on_delete=models.CASCADE, related_name   = 'Transaction_wallet')
+    transaction_amount=models.IntegerField()
+    transaction_choices= (
+       ('withdraw', 'Withdrawal'),
+        ('deposit', 'deposit'),
+    )
+    transaction_type=models.CharField(max_length=10, choices=transaction_choices,null=True)
+    transaction_charge=models.IntegerField()
+    transaction_date=models.DateTimeField(default=timezone.now)
+    original_account=models.ForeignKey('Account', on_delete=models.CASCADE, related_name='Transaction_original_account')
+    destination_account=models.ForeignKey('Account', on_delete=models.CASCADE, related_name='Transaction_destination_account')
 
 class Card(models.Model):
     card_name=models.CharField(max_length=20,null=True)
     card_type=models.CharField(max_length=20,null=True)
     card_number=models.IntegerField()
     security_code=models.IntegerField(null=True)
-    pin=models.IntegerField()
     issued_date=models.DateTimeField(default=timezone.now)
     expiry_date=models.DateTimeField(default=timezone.now)
     serial_number=models.IntegerField()
@@ -67,20 +70,19 @@ class Card(models.Model):
 
 
 class ThirdParty(models.Model):
-    account=models.ForeignKey('Account',on_delete=models.CASCADE,related_name='ThirdParty_account')
     name=models.CharField(max_length=20,null=True)
+    account=models.ForeignKey('Account',on_delete=models.CASCADE,related_name='ThirdParty_account')
     currency=models.ForeignKey('Customer',on_delete=models.CASCADE,related_name='ThirdParty_currency')
     phone_number=models.IntegerField()
-    Id=models.IntegerField()
+    # id=models.IntegerField()
     transaction_cost=models.IntegerField()
-    account=models.ForeignKey('Account',on_delete=models.CASCADE,related_name='ThirdParty_account')
     location=models.ForeignKey('Customer',on_delete=models.CASCADE,related_name='ThirdParty_location')
     
 
 class Notification(models.Model):
     name=models.CharField(max_length=20,null=True)
     message=models.CharField(max_length=100,null=True)
-    date=models.ForeignKey('Transactions',on_delete=models.CASCADE,related_name='Notification_date')
+    date=models.ForeignKey('Transaction',on_delete=models.CASCADE,related_name='Notification_date')
     title=models.CharField(max_length=50,null=True)
     recipient=models.ForeignKey('Customer',on_delete=models.CASCADE,related_name='Notification_recipient')
     notification_id=models.CharField( max_length=20,null=True)
