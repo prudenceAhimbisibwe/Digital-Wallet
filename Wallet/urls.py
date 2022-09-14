@@ -17,8 +17,8 @@ from .views import list_cards
 from .views import list_thirdparties
 from .views import list_notifications
 from .views import list_reciepts
-# from .views import list_loans
-# from .views import list_rewards
+from .views import list_loans
+from .views import list_rewards
 
 
 
@@ -43,6 +43,6 @@ urlpatterns =[
     path("thirdparties/",list_thirdparties,name="thirdparty_list"),
     path("notifications/",list_notifications,name="notification_list"),
     path("reciepts/",list_reciepts,name="receipts_list"),
-#     path("loans/",list_loans,name="loans_list"),
-#     path("rewards/",list_rewards,name="rewards_list"),   
+    path("loans/",list_loans,name="loans_list"),
+    path("rewards/",list_rewards,name="rewards_list"),   
 ]

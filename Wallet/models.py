@@ -117,3 +117,4 @@ class Reward(models.Model):
     transaction=models.ForeignKey('Account',on_delete=models.CASCADE,related_name='Reward_transaction')
     customer_id=models.IntegerField()
     bonus=models.IntegerField()
+    

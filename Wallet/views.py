@@ -14,7 +14,7 @@ from .models import  Wallet
 from .models import Account
 from .models import Transaction
 from .models import ThirdParty
-from .models import Notification,Reciept
+from .models import Notification,Reciept,Loan,Reward
 
 # Create your views here.
 def register_customer(request):
@@ -141,10 +141,10 @@ def list_reciepts(request):
     reciepts=Reciept.objects.all()
     return render(request,"Wallet/list_reciepts.html",{'reciept': reciepts})
 
-# def list_loans(request):
-#     loan=Loan.objects.all()
-#     return render(request,"Wallet/loan.html",{'Loan': loan})
+def list_loans(request):
+    loans=Loan.objects.all()
+    return render(request,"Wallet/list_loan.html",{'loan': loans})
 
-# def list_rewards(request):
-#     reward=Reward.objects.all()
-#     return render(request,"Wallet/reward.html",{'Reward': reward})
+def list_rewards(request):
+    rewards=Reward.objects.all()
+    return render(request,"Wallet/list_rewards.html",{'reward': rewards})
