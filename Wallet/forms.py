@@ -51,3 +51,4 @@ class RewardForm(forms.ModelForm):
     class Meta:
         model= Reward
         fields="__all__"
+        

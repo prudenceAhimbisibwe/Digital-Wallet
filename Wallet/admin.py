@@ -53,5 +53,3 @@ class RewardAdmin(admin.ModelAdmin):
     list_display = ("reward_date","transaction","customer_id","bonus")
     search_fields =("reward_date","transaction","customer_id","bonus")
 admin.site.register(Reward,RewardAdmin)
-
-   
