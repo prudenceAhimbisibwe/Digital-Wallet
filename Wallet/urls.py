@@ -19,6 +19,7 @@ from .views import list_notifications
 from .views import list_reciepts
 from .views import list_loans
 from .views import list_rewards
+from .views import customer_profile,edit_profile
 
 
 
@@ -35,6 +36,7 @@ urlpatterns =[
     path("reciept/",transaction_reciept,name="transaction_reciept"),
     path("loan/",loan,name="loan"),
     path("reward/",reward,name="reward"),
+    # all lists
     path("customers/",list_customers,name="customers"),
     path("accounts/",list_accounts,name="account_list"),
     path("wallets/",list_wallets,name="wallet_list"),
@@ -44,5 +46,9 @@ urlpatterns =[
     path("notifications/",list_notifications,name="notification_list"),
     path("reciepts/",list_reciepts,name="receipts_list"),
     path("loans/",list_loans,name="loans_list"),
-    path("rewards/",list_rewards,name="rewards_list"),   
+    path("rewards/",list_rewards,name="rewards_list"), 
+    # single object view  
+    path("customers/<int:id>/",customer_profile,name="customer_profile"),
+    path("customers/edit/<int:id>/",edit_profile,name="edit_profile")
+
 ]

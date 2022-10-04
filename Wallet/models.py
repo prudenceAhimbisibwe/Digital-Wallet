@@ -13,6 +13,7 @@ class Customer(models.Model):
     email=models.EmailField()
     phonenumber=models.CharField(max_length=10,null=True)
     age=models.CharField(max_length=10,null=True)
+    profile_picture = models.ImageField(default='default.jpg', upload_to='profile_pics')
     gender_choices=(
         ('F','Female'),
         ('M','Male'),
@@ -25,7 +26,7 @@ class Wallet(models.Model):
     customer=models.ForeignKey('Customer',on_delete=models.CASCADE,related_name='Wallet_customer',null=True)
     balance=models.IntegerField()
     amount=models.IntegerField()
-    DateTime=models.DateTimeField(default=timezone.now)
+    DateTime=models.DateTimeField(default=timezone.now)   
     isactive=models.BooleanField()
     currency=models.CharField(max_length=200,null=True)
     pin=models.CharField( max_length=12,null=True)
