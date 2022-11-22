@@ -226,7 +226,7 @@ def editCard_profile(request,id):
     form = CustomerCardForm()(instance=cards)
     return render(request,"wallet/editCard_profile.html",{"form": form})
 
-# Single transction profile
+# Single transaction profile
 def transaction_profile(request,id):
    transactions=Transaction.objects.get(id=id)
    return render(request,"Wallet/transaction_profile.html",{'transctions':transactions})

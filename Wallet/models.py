@@ -20,6 +20,9 @@ class Customer(models.Model):
         ('O','Other')
     )
     gender=models.CharField(max_length=10,choices=gender_choices,null=True)
+    def __str__(self):
+        return str(self.firstname)
+        
 
 
 class Wallet(models.Model):
