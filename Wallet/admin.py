@@ -3,24 +3,24 @@ from .models import Account, Card, Customer, Loan, Notification, Reciept, Reward
 
 
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ("firstname","lastname","address","email","phonenumber","age","gender")
-    search_fields =("firstname","lastname","address","email","phonenumber","gender")
+    list_display = ("firstname","lastname","address","email","phonenumber","age","gender","profile_picture","nationality")
+    search_fields =("firstname","lastname","address","email","phonenumber","age","gender","profile_picture","nationality")
 admin.site.register(Customer,CustomerAdmin)
 
 class WalletAdmin(admin.ModelAdmin):
-    list_display = ("customer","balance","amount","currency","pin","isactive")
-    search_fields =("customer","balance","amount","currency","pin","isactive")
+    list_display = ("wallet_id")
+    search_fields =("wallet_id")
 admin.site.register(Wallet,WalletAdmin)
 
 class AccountAdmin(admin.ModelAdmin):
-    list_display = ("account_number","account_name","balance","account_type","wallet")
-    search_fields =("account_number","account_name","balance","account_type","wallet")
+    list_display = ("account_number","account_name","balance","account_type")
+    search_fields =("account_number","account_name","balance","account_type")
 admin.site.register(Account,AccountAdmin)
 
 
 class TransactionAdmin(admin.ModelAdmin):
     list_display = ("wallet","transaction_amount","transaction_charge")
-    search_fields =("Wallet","transaction_amount")
+    search_fields =("Wallet","transaction_amount","transaction_charge")
 admin.site.register(Transaction,TransactionAdmin)
    
 class CardAdmin(admin.ModelAdmin):
@@ -39,8 +39,8 @@ class LoanAdmin(admin.ModelAdmin):
 admin.site.register(Loan,LoanAdmin)
 
 class NotificationAdmin(admin.ModelAdmin):
-    list_display = ("name","message","date","title","recipient","notification_id","status")
-    search_fields =("name","message","date","title","recipient","notification_id","status")
+    list_display = ("message","date","title","status","customer")
+    search_fields =("message","date","title","status","customer")
 admin.site.register(Notification,NotificationAdmin)
 
 
@@ -50,6 +50,6 @@ class RecieptAdmin(admin.ModelAdmin):
 admin.site.register(Reciept,RecieptAdmin)
 
 class RewardAdmin(admin.ModelAdmin):
-    list_display = ("reward_date","transaction","customer_id","bonus")
-    search_fields =("reward_date","transaction","customer_id","bonus")
+    list_display = ("reward_date","recepient","customer_id","bonus")
+    search_fields =("reward_date","recepient","customer_id","bonus")
 admin.site.register(Reward,RewardAdmin)

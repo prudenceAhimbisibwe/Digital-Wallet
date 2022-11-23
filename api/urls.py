@@ -1,7 +1,7 @@
 from django.urls import path,include
 from rest_framework import routers
-from Wallet.models import Card, Customer, Notification, Reciept, Transaction, Wallet,Account,Loan
-from .views import AccountBuyAirtimeView, AccountLoanRepaymentView, AccountLoanRequestView, AccountViewSet, AccountWithdrawalView, CardViewSet, CustomerViewSet, ReceiptViewSet, TransactionViewSet, WalletViewSet,LoanViewSet,NotificationViewSet,AccountDepositView,AccountTransferView
+from Wallet.models import *
+from .views import *
 
 router=routers.DefaultRouter()  #fetch resource dynamically
 router.register(r'customers',CustomerViewSet,basename=Customer)
@@ -10,7 +10,7 @@ router.register(r'accounts',AccountViewSet,basename=Account)
 router.register(r'cards',CardViewSet,basename=Card)
 router.register(r'transactions',TransactionViewSet,basename=Transaction)
 router.register(r'loans',LoanViewSet,basename=Loan)
-router.register(r'receipts',ReceiptViewSet,basename=Reciept)
+router.register(r'reciepts',ReceiptViewSet,basename=Reciept)
 router.register(r'notifications',NotificationViewSet,basename=Notification)
 
 urlpatterns=[

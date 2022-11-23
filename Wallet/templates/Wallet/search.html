@@ -1,0 +1,26 @@
+{% extends "wallet/customer_list.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Document</title>
+</head>
+<body>
+  <h1>hi</h1>
+  {% block content %}
+  {% for resul in result%}
+       <h1>You searched for {{resul}} </h1>
+       <br>
+       {{resul.first_name}}
+       <br>
+       {{resul.last_name}}
+       {%endfor%}
+       <br/>
+     <p>Hey,the custom
+        er is not found</p>
+     {% endblock %}
+</body>
+</html>

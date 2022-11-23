@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,25 +7,51 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Document</title>
 </head>
-<body>
-    <table class= "table" style="width: 50rem;"> 
-        <tr> 
-            <th>firstname</th> 
-            <th>age</th> 
-            <th>email</th> 
-            <!-- <th>profile_picture</th> -->
-        </tr> 
-        {% for customer in customers %} 
-        <tr> 
-            <td>{{ customer.firstname}}</td> 
-            <td>{{ customer.age}}</td> 
-            <td>{{ customer.email}}</td>
-            <!-- <td><a href="{% url 'customer_profile' id=customer.id %}"> view profile </td> -->
-         </tr> 
-         {%endfor%} 
-    </table>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<body style="background-color:rgb(180, 112, 112) ;">
+    <div class="Home">
+        <nav>
+          <ul style="list-style-type: none; float:right; padding-right:95px;display:inline-flex;padding-left: 56px;margin-top: 20px;">
+            <!-- <li><a href="{url 'home_page'}" style="color: white; margin-right: -145px;text-align: right;">Home</a></li> -->
+            <li><a href="{% url 'all_customers'  %}"style="color:#F8BF87  ;padding-left:653px;margin-right: 45px;" >Customers</a></li>
+            <li><a href="{% url 'all_accounts' %}" style="margin-right: 45px;color: white;">Accounts</a></li>
+            <li><a href="{% url 'all_cards'%}" style="margin-right: 45px;color: white;">Cards</a></li>
+            <li><a href="{% url  'all_wallets'%}" style="color:white;text-decoration: none;margin-right: 45px;">Wallets</a></li>
+            <li><a href="{% url 'all_receipts' %}" style="color:white;text-decoration: none;margin-right: 45px;">Recepts</a></li>
+            <li><a href="{% url 'all_rewards' %}" style="color:white;text-decoration: none;margin-right: 45px;">Reward</a></li>
+            <li><a href="{% url 'all_loans'%}" style="color:white;text-decoration: none;margin-right: 45px;">Loans</a></li>
+            <li><a href="{% url 'all_thirdpartys' %}" style="color:white;text-decoration: none;margin-right: 45px;">Thirdpartys</a></li>
+            <li><a href="{% url 'all_transactions' %}" style="color:white;text-decoration: none;margin-right: 45px;">Transactions</a></li>
+            <form  action="{% url 'all_customers'%}">{%csrf_token%}<input class="form-control mr-sm-2" type="search" placeholder="Search Customer" aria-label="Search" name="customer_found" style="width:13rem ;">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="float:right;margin:0% -16% 0% 0%">Search</button>
+    </form>
+          </ul>
+        </nav>
+         <h1 style="font-size: 26px;text-align: center;">All Customers</h1>
+     <table class="table table-hover table-dark" style="width:69rem;margin:6% 0% 0% 7%;">
+        <td style="color: white;height: 10px;">First Name</td>
+        <td style="color: white;height: 10px">Age</td>
+        <td style="color: white;height: 10px">Email</td>
+        <td style="color: white;height: 10px">Address</td>
+        <td style="color: white;height: 10px">Gender</td>
+        <td style="color: white;height: 10px">Phone Number</td>
+        <td style="color: white;height: 10px">Nationality</td>
+    </th>
+   <tr>{% for customer in Customers%}</tr>
+   <!-- <td >{{forloop.customer}}</td> -->
+   <td   style="border: solid 1px black;width:20rem; height: 3rem;">{{customer.first_name}}</td>
+   <td   style="border: solid 1px black;width:10rem ;height: 3rem;">{{customer.age}}</td>
+   <td   style="border: solid 1px black;width:8rem; height: 3rem;">{{customer.email}}</td>
+   <td   style="border: solid 1px black;width:10rem; height: 3rem;">{{customer.address}}</td>
+   <td   style="border: solid 1px black;width:10rem; height: 3rem;">{{customer.gender}}</td>
+   <td   style="border: solid 1px black;width:14rem; height: 3rem;">{{customer.phone_number}}</td>
+   <td   style="border: solid 1px black;width:10rem; height: 3rem;">{{customer.nationality}}</td>
+   <td   style="border: solid 1px black;width:10rem; height: 3rem;"><img src="{{customer.image.url}}"></td>
+   <td><a href="{% url 'edit_customer' customer.id%}">Edit</a></td>
+    {%endfor%}
+     </table>
+     <!-- action="{%url 'all_loans'%}" -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -1,54 +1,41 @@
 from django.urls import path
-from .views import  notification, register_customer, reward
-from .views import customer_wallet
-from .views import customer_account 
-from .views import transaction 
-from .views import card 
-from .views import thirdparty
-from .views import notification
-from .views import transaction_reciept
-from .views import loan
-from .views import reward
-from .views import list_customers
-from .views import list_wallets
-from .views import list_accounts
-from .views import list_transactions
-from .views import list_cards
-from .views import list_thirdparties
-from .views import list_notifications
-from .views import list_reciepts
-from .views import list_loans
-from .views import list_rewards
-from .views import customer_profile,edit_profile
-
-
-
+from .views import *
 
 # creating a path
-urlpatterns =[
-    path("register/",register_customer,name="registration"),
-    path("customer/",customer_wallet,name="customer_wallet"),
-    path("account/",customer_account,name="customer_account"),
-    path("transaction/",transaction,name="transaction"),
-    path("card/",card,name="card"),
-    path("thirdparty/",thirdparty,name="thirdparty"),
-    path("notification/",notification,name="customer_notification"),
-    path("reciept/",transaction_reciept,name="transaction_reciept"),
-    path("loan/",loan,name="loan"),
-    path("reward/",reward,name="reward"),
-    # all lists
-    path("customers/",list_customers,name="customers"),
-    path("accounts/",list_accounts,name="account_list"),
-    path("wallets/",list_wallets,name="wallet_list"),
-    path("transactions/",list_transactions,name="transaction_list"),
-    path("cards/",list_cards,name="card_list"),
-    path("thirdparties/",list_thirdparties,name="thirdparty_list"),
-    path("notifications/",list_notifications,name="notification_list"),
-    path("reciepts/",list_reciepts,name="receipts_list"),
-    path("loans/",list_loans,name="loans_list"),
-    path("rewards/",list_rewards,name="rewards_list"), 
-    # single object view  
-    path("customers/<int:id>/",customer_profile,name="customer_profile"),
-    path("customers/edit/<int:id>/",edit_profile,name="edit_profile")
-
+urlpatterns=[
+    path("",home_page,name='home'),
+    # path("customers/",list_customers,name='all_customers'),
+    path("customers_get/",SearchCustomer.as_view(),name='all_customers'),
+    path("customers/<int:id>/",customer_profile,name="customerProfile"),
+    path("customers/edit/<int:id>/",edit_customer,name="edit_customer"),
+    # path('customers/<int:id>/',CustomerProfile.as_view(),name="edit_customer"),
+    path("registercust/",register_customer,name='registration'),
+    path("register_account/",register_account,name='account'),
+    path("accounts/",list_accounts,name='all_accounts'),
+    path("accounts/<int:id>/",account_profile,name="accountProfile"),
+    path("accounts/edit/<int:id>/",edit_account,name="edit_account"),
+    path("register_wallet/",register_wallet,name='wallet'),
+    path("wallets/",list_wallet,name='all_wallets'),
+    path("wallets/<int:id>/",wallet_profile,name="walletProfile"),
+    path("wallets/edit/<int:id>/",edit_wallet,name="edit_wallet"),
+    path("register_transaction/",register_transaction,name='Transaction'),
+    path("transactions/",list_transaction,name='all_transactions'),
+    path("transactions/<int:id>/",transaction_profile,name="transactionProfile"),
+    path("transactions/edit/<int:id>/",edit_transaction,name="edit_transaction"),
+    path('card/',register_card,name="card"),
+    path("cards/",list_card,name='all_cards'),
+    path("cards/<int:id>/",card_profile,name="cardProfile"),
+    path("cards/edit/<int:id>/",edit_card,name="edit_card"),
+    path('thirdp/',register_thirdparty,name='thirdparty'),
+    path('thirdpartys/',list_thirdparty,name='all_thirdpartys'),
+    path('notification/',register_notification,name='notification'),
+    path('notifications/',notification_list,name='all_notifications'),
+    path('loan/',register_loan,name='loan'),
+    path('loans/',list_loan,name='all_loans'),
+    path('receipt/',register_receipt,name='receipt'),
+    path('receipts/',list_receipts,name='all_receipts'),
+    path("receipts/<int:id>/",receipt_profile,name="receiptProfile"),
+    path("receipts/edit/<int:id>/",edit_receipts,name="edit_receipt"),
+    path('reward/',register_reward,name='reward'),
+    path('rewards/',list_reward,name='all_rewards'),   
 ]

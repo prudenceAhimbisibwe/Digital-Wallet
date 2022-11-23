@@ -1,39 +1,45 @@
 from dataclasses import field
-from importlib.metadata import MetadataPathFinder
+# from importlib.metadata import MetadataPathFinder
 from statistics import mode
 from rest_framework import serializers
-from wallet.models import Card, Customer, Receipt, Transaction, Wallet,Account,Loan,Notifcation
+from Wallet.models import *
 
 class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model=Customer
-        fields=("first_name","last_name","age","email","address")
+        fieds="__all__"
+        
 class WalletSerializer(serializers.ModelSerializer):
     class Meta:
         model=Wallet
-        fields=("customer","currency_supported","wallet_id")
+        fieds="__all__"
+
 class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model=Account
-        fields=("account_number","customer","account_balance","pin","loan_balance")
+        fieds="__all__"
+
 class CardSerializer(serializers.ModelSerializer):
     class Meta:
         model=Card
-        fields=("card_number","expiry_date","card","card_security_code","issuer","walletb")
+        fieds="__all__"
+
 class TransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model=Transaction
-        fields=("walletb","origin_account","destination_account","transaction_code","transaction_charge","transaction_amount","transaction_date")
+        fieds="__all__"
+
 class LoanSerializer(serializers.ModelSerializer):
     class Meta:
         model= Loan
-        fields=("loan_amount","loan_type","interest_rate","date")
-        # "loan_term","loan_Id","walletb")
+        fieds="__all__"
+
 class ReceiptSerializer(serializers.ModelSerializer):
     class Meta:
-        model=Receipt
-        fields=("receipt_date","receipt_number","receipt_file","transaction")
+        model=Reciept
+        fieds="__all__"
+
 class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
-        model= Notifcation
+        model= Notification
         fieds="__all__"
