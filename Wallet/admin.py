@@ -1,15 +1,14 @@
 from django.contrib import admin
 from .models import Account, Card, Customer, Loan, Notification, Reciept, Reward, ThirdParty, Transaction, Wallet
 
-
 class CustomerAdmin(admin.ModelAdmin):
     list_display = ("firstname","lastname","address","email","phonenumber","age","gender","profile_picture","nationality")
     search_fields =("firstname","lastname","address","email","phonenumber","age","gender","profile_picture","nationality")
 admin.site.register(Customer,CustomerAdmin)
 
 class WalletAdmin(admin.ModelAdmin):
-    list_display = ("wallet_id")
-    search_fields =("wallet_id")
+    list_display = ("wallet_id","customer","currency_supported")
+    search_fields =("wallet_id","customer","currency_supported")
 admin.site.register(Wallet,WalletAdmin)
 
 class AccountAdmin(admin.ModelAdmin):
@@ -24,13 +23,13 @@ class TransactionAdmin(admin.ModelAdmin):
 admin.site.register(Transaction,TransactionAdmin)
    
 class CardAdmin(admin.ModelAdmin):
-    list_display = ("card_name","card_type","card_number","security_code","issuer","issued_date")
-    search_fields =("card_name","card_type","card_number","security_code","issuer","issued_date")
+    list_display = ("card","card_number","card_security_code","issuer","wallet")
+    search_fields =("card","card_number","card_security_code","issuer","wallet")
 admin.site.register(Card,CardAdmin)
 
 class ThirdPartyAdmin(admin.ModelAdmin):
-    list_display = ("name","currency","phone_number","id","transaction_cost","location")
-    search_fields =("name","currency","phone_number","id","transaction_cost","location")
+    list_display = ("account","wallet","date_of_issue")
+    search_fields =("account","wallet","date_of_issue")
 admin.site.register(ThirdParty,ThirdPartyAdmin)
 
 class LoanAdmin(admin.ModelAdmin):

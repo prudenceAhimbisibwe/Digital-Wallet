@@ -1,4 +1,3 @@
-
 from datetime import datetime
 from email import message
 from email.policy import default
@@ -27,7 +26,7 @@ class Customer(models.Model):
 
 class Wallet(models.Model):
     customer=models.OneToOneField(null=True,on_delete=models.CASCADE,to=Customer)
-    currency_supported=models.CharField(max_length=27)
+    currency_supported=models.CharField(max_length=27, null=True)
     wallet_id=models.IntegerField(null=True)
     
 class Account(models.Model):
@@ -131,7 +130,7 @@ class Transaction(models.Model):
     destination_account=models.ForeignKey('Account', on_delete=models.CASCADE, related_name='Transaction_destination_account')
     # def __str__(self):
     #     return (self.wallet)
-    
+
 class Card(models.Model):
     card_number=models.IntegerField()
     expiry_date=models.DateTimeField(default=datetime.now)
@@ -140,9 +139,9 @@ class Card(models.Model):
         ('credit','credit')
     )
     card=models.CharField(max_length=6,choices=card_type_choices,null=True)
-    card_security_code=models.CharField(max_length=6)
-    issuer=models.CharField(max_length=33)
-    wallet=models.ForeignKey(on_delete=models.CASCADE,to=Wallet)
+    card_security_code=models.CharField(max_length=6,null=True)
+    issuer=models.CharField(max_length=33,null=True)
+    wallet=models.ForeignKey(on_delete=models.CASCADE,to=Wallet,null=True)
 
 class ThirdParty(models.Model):
     account=models.ForeignKey(Account,on_delete=models.CASCADE,related_name="acc",null=True)
@@ -151,15 +150,15 @@ class ThirdParty(models.Model):
     amount=models.BigIntegerField(null=True) 
 
 class Notification(models.Model):
-    message=models.CharField(max_length=10000)
-    title=models.CharField(max_length=900)
-    date=models.DateTimeField(default=datetime.now)
+    message=models.CharField(max_length=10000, null=True)
+    title=models.CharField(max_length=900,null=True)
+    date=models.DateTimeField(default=datetime.now,null=True)
     state=(
         ('active','active'),
         ('passive','passive')
     )
     status=models.CharField(max_length=7,choices=state,null=True)
-    customer=models.ForeignKey(on_delete=models.CASCADE,to=Customer)
+    customer=models.ForeignKey(on_delete=models.CASCADE,to=Customer,null=True)
 
 class Reciept(models.Model):
     name=models.CharField(max_length=20,null=True)
@@ -171,25 +170,25 @@ class Reciept(models.Model):
     )
     reciept_type=models.CharField(max_length=10, choices=reciept_choice,null=True)
     reciept_file=models.FileField(upload_to='Wallet/')
-    transaction=models.ForeignKey(on_delete=models.CASCADE, to =Transaction)
-    account_number=models.IntegerField()
-    total_amount=models.IntegerField()
+    transaction=models.ForeignKey(on_delete=models.CASCADE, to =Transaction,null=True)
+    account_number=models.IntegerField(null=True)
+    total_amount=models.IntegerField(null=True)
     # def __str__(self):
     #     return (self.transaction)
 
 class Loan(models.Model):
-    amount=models.IntegerField()
-    issued_date=models.DateField()
+    amount=models.IntegerField(null=True)
+    issued_date=models.DateField(null=True)
     due_date=models.DateTimeField(default=timezone.now)
     loan_term=models.CharField(max_length=100,null=True)
-    loan_balance=models.IntegerField()
+    loan_balance=models.IntegerField(null=True)
     guarantee=models.ForeignKey('Customer',on_delete=models.CASCADE,related_name='Loan_guarentee')
     loan_purpose=models.CharField(max_length=100,null=True)
     wallet=models.ForeignKey("Wallet",on_delete=models.CASCADE,related_name='Loan_wallet')
 
 class Reward(models.Model):
-    reward_date=models.DateTimeField(default=timezone.now)
-    recepient=models.ForeignKey(on_delete=models.CASCADE,to=Customer)
-    customer_id=models.IntegerField()
+    reward_date=models.DateTimeField(default=timezone.now,null=True)
+    recepient=models.ForeignKey(on_delete=models.CASCADE,to=Customer,null=True)
+    customer_id=models.IntegerField(null=True)
     bonus=models.IntegerField(null=True)
     

@@ -81,9 +81,9 @@ WSGI_APPLICATION = 'DigitalWallet.wsgi.application'
 DATABASES = {
     "default":{
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "myproject",
-        "USER":"myprojectuser",
-        "PASSWORD":"password",
+        "NAME": "digital",
+        "USER":"digitaluser",
+        "PASSWORD":"wallet",
         "HOST":"localhost",
         "PORT":5432,
     }

@@ -2,8 +2,8 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.views.generic.base import View
-# from rest_framework.views import APIView
-from Wallet import views
+from rest_framework.views import APIView
+from Wallet.views import views
 from email import message
 from urllib import response
 from django.shortcuts import render
