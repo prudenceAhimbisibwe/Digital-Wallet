@@ -80,7 +80,6 @@ class AccountTransferView(views.APIView):
         account_id=request.data["destination"]   
         amount=request.data["amount"]  #to handle json data coming
         # destination_account=request.data["destination"]
-        
         try:
             account=Account.objects.get(id=account_id)    #get destination account
         except ObjectDoesNotExist:  #when no object exist
