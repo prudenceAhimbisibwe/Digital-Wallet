@@ -1,6 +1,69 @@
-<h2>Customer Registration</h2>
-<form method="POST" class="post-form">{%csrf_token %}
-    {{form.as_p}}
-    <button type="submit" class="save btn btn-default">Save</button>
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body style="background-image: url(/static/images/walligirl.jpg);background-repeat:no-repeat;background-size: cover;height: 100%;">
+    <h2>Customer Registeration</h2>
+    <form method="POST">
+        {%csrf_token%}
 
-</form>
+        <div class="card" style="width: 40rem; height: 40rem;margin:4% 0% 0% 26%;background-color:#000000;">
+        
+            <label for="firstname" style="width:29rem; margin:3% 0% 0% 13%;color: white;">Firstname
+                {{formi.firstname}}  
+                <!-- <input type="text" placeholder="Enter first_name"> -->
+            </label>
+        <!-- <div class="col"> -->
+
+            <label for="lastname" style="width:29rem; margin:0% 0% 0% 13%;color: white;">Lastname
+                {{formi.lastname}}  
+                
+            </label>
+
+            <label for="address" style="width:29rem; margin:0% 0% 0% 13%;color: white;">Address
+                {{formi.address}}  
+                
+            </label>
+            <label for="email" style="width:29rem; margin:0% 0% 0% 13%;color: white;">Email
+                {{formi.email}}  
+                
+            </label>  
+            <label for="phone_number" style="width:29rem; margin:0% 0% 0% 13%;color: white;">Phone Number
+                {{formi.phonenumber}}  
+                
+            </label>
+        <!-- </label>  -->
+         <label for="gender" style="width:29rem; margin:0% 0% 0% 13%;color: white;">Gender
+            {{formi.gender}}  
+            
+        </label>
+        <label for="gender" style="width:29rem; margin:0% 0% 0% 13%;color: white;">Age
+            {{formi.age}}  
+            
+        </label>
+    <!-- </label>   -->
+    <label for="nationality" style="width:29rem; margin:0% 0% 0% 13%;color: white;">Nationality
+        {{formi.nationality}}  
+        
+    </label>
+    <label for="your picture" style="width:29rem; margin:0% 0% 0% 13%;color: white;">Image
+        {{formi.profile_picture}}  
+        
+    </label>
+
+        <button type="submit" class="save btn btn-default" style="background-color:purple ;width:10rem;margin:2% 0% 0% 35%">Save</button>
+        
+    </form>
+    
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
+</body>
+</html>

@@ -101,7 +101,7 @@ def edit_wallet(request,id):
 
 def list_wallet(request):
     wallet=Wallet.objects.all()
-    return render(request,"wallet/wallet_list.html",{"wallet":wallet})
+    return render(request,"wallet/list_wallets.html",{"wallet":wallet})
 
 def register_transaction(request):
     if request.method=="POST":
@@ -110,11 +110,11 @@ def register_transaction(request):
                 form_transact.save()
     else:
         form_transact=CustomerTransactionForm()
-    return render(request,"Wallet/register_transaction.html", {"transact":form_transact})
+    return render(request,"Wallet/transaction.html", {"transact":form_transact})
 
 def list_transaction(request):
     transactions=Transaction.objects.all()
-    return render(request,"Wallet/transaction_list.html",{"transactions":transactions})
+    return render(request,"Wallet/list_transactions.html",{"transactions":transactions})
 
 def register_card(request):
     card_form=CustomerCardForm()
@@ -124,7 +124,7 @@ def register_card(request):
             card_form.save()
     else:
         card_form=CustomerCardForm()
-    return render(request,"Wallet/card_register.html",{"card":card_form})
+    return render(request,"Wallet/card.html",{"card":card_form})
 def transaction_profile(request,id):
     transaction=Transaction.objects.get(id=id)
     return render(request,"Wallet/transaction_profile.html",{"transactions":transaction})
@@ -141,7 +141,7 @@ def edit_transaction(request,id):
              
 def list_card(request):
     card=Card.objects.all()
-    return render(request,"Wallet/list_card.html",{"cards":card})
+    return render(request,"Wallet/list_cards.html",{"cards":card})
 def card_profile(request,id):
     card=Card.objects.get(id=id)
     return render(request,"Wallet/card_profile.html",{"cards":card})
@@ -163,11 +163,11 @@ def register_thirdparty(request):
            thirdparty_form.save()
     else:
         thirdparty_form=ThirdPartyForm()
-    return render(request,"Wallet/register_thirdp.html",{"third":thirdparty_form})
+    return render(request,"Wallet/thirdparty.html",{"third":thirdparty_form})
 
 def list_thirdparty(request):
     thirds=ThirdParty.objects.all()
-    return render (request,'Wallet/thirdparty_list.html',{"thirdpartys":thirds})
+    return render (request,'Wallet/list_thirdparties.html',{"thirdpartys":thirds})
 
 def register_notification(request):
     if request.method=="POST":
